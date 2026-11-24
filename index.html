@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ЖИ мен Адам: Информатика соты</title>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#120f24;font-family:'Pixelify Sans','VT323',monospace;color:#f4ecd0;display:flex;justify-content:center}
+#g{width:100%;max-width:720px;min-height:100vh;display:flex;flex-direction:column;gap:8px;padding:8px}
+.box{border:4px solid #f4ecd0;background:#1d1a3a;box-shadow:4px 4px 0 #000}
+#top{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px;font-size:13px;text-align:center}
+#top b{display:block;font-size:22px}
+#sr{color:#5ec8ff}#sh{color:#ffb15e}
+#stage{display:flex;align-items:flex-end;justify-content:space-between;gap:4px;padding:8px 8px 0;min-height:250px;background:linear-gradient(#2c2766 0 58%,#6b4429 58%)}
+.side{width:30%;text-align:center;font-size:12px}
+.side svg{width:100%;height:auto;display:block;image-rendering:pixelated}
+.pod{background:#8a5a33;border:3px solid #000;padding:3px;font-size:11px;margin-top:-6px}
+#desk{width:36%;display:flex;flex-direction:column;align-items:center;gap:6px;padding-bottom:6px}
+#topic{width:100%;padding:6px;font-size:12px;line-height:1.25;text-align:center;background:#f4ecd0;color:#1d1a3a;border:3px solid #000}
+#gv{width:56px;height:48px;transform-origin:80% 90%}
+#gv.hit{animation:hit .4s steps(5)}
+@keyframes hit{0%{transform:rotate(-50deg)}55%{transform:rotate(25deg)}100%{transform:rotate(0)}}
+.bench{width:100%;background:#8a5a33;border:3px solid #000;text-align:center;font-size:12px;padding:3px}
+.eye{fill:#3ff}
+.robot.talk .eye{animation:bl .25s steps(1) infinite}
+@keyframes bl{50%{fill:#055}}
+.robot.talk .mouth{animation:mo .2s steps(1) infinite}
+@keyframes mo{50%{height:1px}}
+.arm{transform-box:fill-box;transform-origin:50% 0}
+.human.talk .arm-r{animation:gs .35s steps(2) infinite alternate}
+.human.talk .arm-l{animation:gs2 .45s steps(2) infinite alternate}
+@keyframes gs{to{transform:rotate(-55deg)}}
+@keyframes gs2{to{transform:rotate(40deg)}}
+#dlg{padding:10px;min-height:160px;display:flex;flex-direction:column;gap:8px}
+#who{font-weight:700;font-size:15px}
+#txt{font-size:16px;line-height:1.4;flex:1;min-height:80px}
+#hint{font-size:12px;opacity:.75}
+.row{display:flex;gap:10px}
+.btn{flex:1;font:inherit;font-size:17px;font-weight:700;padding:12px 6px;border:4px solid #000;box-shadow:0 4px 0 #000;cursor:pointer;color:#111}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
+.btn:disabled{opacity:.35;cursor:default}
+#pr{background:#5ec8ff}#ph{background:#ffb15e}#nx,#st{background:#ffd84a}
+#ov{position:fixed;inset:0;background:rgba(8,6,20,.92);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9;overflow:auto}
+#ov .box{max-width:460px;padding:18px;text-align:center;display:flex;flex-direction:column;gap:12px}
+#ov h1{font-size:24px;margin:0;color:#ffd84a}
+#ov p{margin:0;line-height:1.4}
+.big{font-size:30px;color:#5ee08a}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="g">
+  <div id="top" class="box"><div id="sr">ЖИ ҰПАЙЫ<b id="vr">0</b></div><div id="rd">Кезек<b>1/12</b></div><div id="sh">АДАМ ҰПАЙЫ<b id="vh">0</b></div></div>
+  <div id="stage" class="box">
+    <div class="side"><svg id="robot" class="robot" viewBox="0 0 32 40" shape-rendering="crispEdges">
+      <rect x="15" y="0" width="2" height="3" fill="#ccc"/><rect x="14" y="0" width="4" height="2" fill="#f55"/>
+      <rect x="6" y="3" width="20" height="14" fill="#9aa5b8" stroke="#000"/>
+      <rect class="eye" x="10" y="7" width="4" height="4"/><rect class="eye" x="18" y="7" width="4" height="4"/>
+      <rect class="mouth" x="11" y="13" width="10" height="2" fill="#222"/>
+      <rect x="8" y="18" width="16" height="14" fill="#6f7b92" stroke="#000"/>
+      <rect x="11" y="21" width="4" height="3" fill="#5ee08a"/><rect x="17" y="21" width="4" height="3" fill="#ffd84a"/>
+      <rect x="3" y="18" width="4" height="12" fill="#9aa5b8" stroke="#000"/><rect x="25" y="18" width="4" height="12" fill="#9aa5b8" stroke="#000"/>
+      <rect x="10" y="32" width="4" height="8" fill="#555"/><rect x="18" y="32" width="4" height="8" fill="#555"/></svg>
+      <div class="pod">ЖИ (РОБОТ)</div></div>
+    <div id="desk">
+      <div id="topic">—</div>
+      <svg id="gv" viewBox="0 0 40 40" shape-rendering="crispEdges"><rect x="8" y="2" width="22" height="10" fill="#d9954f" stroke="#000" stroke-width="2" transform="rotate(-20 19 7)"/><rect x="18" y="10" width="5" height="28" fill="#a56a32" stroke="#000" stroke-width="2" transform="rotate(-20 19 7)"/></svg>
+      <div class="bench">ТӨРЕШІ (СІЗ)</div>
+    </div>
+    <div class="side"><svg id="human" class="human" viewBox="0 0 32 40" shape-rendering="crispEdges">
+      <rect x="10" y="2" width="12" height="4" fill="#3a2410"/><rect x="10" y="5" width="12" height="10" fill="#f2c18d" stroke="#000"/>
+      <rect x="12" y="9" width="2" height="2" fill="#000"/><rect x="18" y="9" width="2" height="2" fill="#000"/><rect x="13" y="13" width="6" height="1" fill="#a33"/>
+      <rect x="8" y="16" width="16" height="15" fill="#3b73d6" stroke="#000"/><rect x="15" y="16" width="2" height="15" fill="#fff"/>
+      <rect class="arm arm-l" x="4" y="17" width="4" height="12" fill="#3b73d6" stroke="#000"/>
+      <rect class="arm arm-r" x="24" y="17" width="4" height="12" fill="#3b73d6" stroke="#000"/>
+      <rect x="10" y="31" width="5" height="9" fill="#333"/><rect x="17" y="31" width="5" height="9" fill="#333"/></svg>
+      <div class="pod">АДАМ</div></div>
+  </div>
+  <div id="dlg" class="box">
+    <div id="who">&nbsp;</div>
+    <div id="txt"></div>
+    <div id="hint"></div>
+    <div class="row" id="rj"><button class="btn" id="pr" disabled>ЖИ-ГЕ ҰПАЙ</button><button class="btn" id="ph" disabled>АДАМҒА ҰПАЙ</button></div>
+    <div class="row" id="rn" style="display:none"><button class="btn" id="nx">КЕЛЕСІ ▶</button></div>
+  </div>
+</div>
+<div id="ov"><div class="box"><h1>ЖИ мен Адам: сот</h1>
+<p>Информатика, 8-сынып. Кім тест құрастыруда жақсы — Жасанды интеллект пе, әлде Адам ба?</p>
+<p>Әр тақырыпта алдымен ЖИ, содан кейін Адам өз пікірін қорғайды. Сіз төреші ретінде әр сөзден кейін ұпайды кімге беретініңізді таңдайсыз.</p>
+<button class="btn" id="st">БАСТАУ</button></div></div>
+<script>
+const T=["Компьютерлік желілер және ақпараттық қауіпсіздік","Ақпаратты өлшеу және санау жүйелері","Python бағдарламалау тілі","Электрондық кестелер","Компьютердің құрылғылары мен архитектурасы","Алгоритмдеу және деректер типтері"];
+const D=[
+{w:'r',q:"Мен секундтар ішінде жүздеген желі және қауіпсіздік сұрақтарын құрастырамын: IP-мекенжай, брандмауэр, вирус. Менің дерекқорым үнемі жаңарып тұрады, мен шаршамаймын және қателеспеймін!"},
+{w:'h',q:"Мен сыныпты білемін: оқушылар «күшті құпия сөз» ұғымын жиі қате түсінеді. Мен өмірден мысал аламын — мектептің Wi-Fi желісі, жалған хабарлама. Сұрақ оқушыға жақын әрі түсінікті болады."},
+{w:'r',q:"Санау жүйелері — дәлдік мәселесі. 1011₂ санын ауыстыру немесе 2 Кбайт = 16384 бит есебін мен ешқашан шатастырмаймын. Бір минутта жүздеген нұсқа жасап, жауабын автоматты түрде тексеремін."},
+{w:'h',q:"Екілік жүйені мен оқушыларға ойын арқылы түсіндіремін: шамдар жанады да сөнеді. Сондықтан тест қызықты болады, ал мен оқушылардың типтік қателерін алдын ала білемін."},
+{w:'r',q:"Python кодының нәтижесін мен нақты есептеймін. Алдамшы жауаптарды жиі кездесетін қателер базасынан жасаймын, мысалы, 7 // 2 және 7 / 2 айырмашылығы бойынша."},
+{w:'h',q:"Мен көп жыл сабақ бердім: оқушылар отступта және жолдарды қосқанда қай жерде қателесетінін көзбен көргендей білемін. Бұл — тек педагогикалық тәжірибеден келетін білім."},
+{w:'r',q:"Электрондық кестелердегі формулалар мен абсолютті сілтемелер — менің күшті жағым. Мен 50 түрлі кесте мен формуланы бір минутта жасап, нәтижесін бірден тексере аламын."},
+{w:'h',q:"Мен тестті оқушының өміріне байланыстырамын: сыныптың бағалары, асхана бағасы, отбасы бюджеті. Кесте — тек сандар емес, ол өмірлік мәселені шешу құралы."},
+{w:'r',q:"Компьютер құрылғылары — жүйелі білім: процессор, ұшпалы және ұшпайтын жады. Мен барлық терминді бір стандартта қолданамын және ешқашан шатастырмаймын."},
+{w:'h',q:"Мен сабаққа нақты құрылғыны әкелемін: жад модулі мен процессорды көрсетемін. Содан кейін тест құрамын — оқушы затты ұстап көріп, сұрақты жақсы түсінеді."},
+{w:'r',q:"Алгоритм мен деректер типтері — таза логика. Мен тармақталу, цикл, int, float, str бойынша мыңдаған қайталанбайтын тапсырма жасап, күрделілік деңгейін бірден реттеймін."},
+{w:'h',q:"Мен тестті оқушының ойлау жолына қарай құрамын: қиын сұрақтан бұрын жеңілін қоямын. Шығармашылық пен интуицияны алгоритмге үйрету қиын, ал мен оны өзім жасаймын."}
+];
+const RB=[
+"ЖИ-ге ұпай берілді. Себебі: жылдамдық, жүйелілік және үлкен дерекқор тест құрастыруда сенімді. Бірақ тәуекел бар: ЖИ сұрақтары шаблонды болып, оқушының жас ерекшелігін ескермеуі мүмкін.",
+"Төреші ЖИ-дің фактілерін салмақты деп тапты: ол шаршамайды, дәл есептейді және көп нұсқа жасайды. Алайда сұрақтар бірыңғай болып, шығармашылық жетіспеуі мүмкін.",
+"Ұпай Роботқа: тексеру жылдам, қате аз, жүйелілігі жоғары. Дегенмен ЖИ оқушының психологиясын сезбейді, сондықтан мұғалімнің қарауы қажет болады."];
+const HB=[
+"Адамға ұпай берілді. Себебі: шығармашылық, интуиция және оқушылардың психологиясын ескеру тест сапасын арттырады. Бірақ тәуекел бар: жұмыс көп уақыт алады және мұғалімнің көзқарасы субъективті болуы мүмкін.",
+"Төреші Адамның педагогикалық тәжірибесін жоғары бағалады: ол өмірлік мысал келтіріп, оқушының типтік қателерін біледі. Алайда ол шаршайды және кейде қателесуі мүмкін.",
+"Ұпай Адамға: тест оқушыға жақын, қызықты және логикасы түсінікті болады. Дегенмен дайындау ұзақ жүреді және қорытынды субъективті болуы ықтимал."];
+const $=id=>document.getElementById(id);
+let i,sr,sh,busy,fin,ac,timer;
+const A=()=>{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac};
+function tone(f,d,ty='square',v=.05,w=0){try{const a=A(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime+w;o.type=ty;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d)}catch(e){}}
+function bang(){try{const a=A(),n=a.sampleRate*.18,b=a.createBuffer(1,n,a.sampleRate),c=b.getChannelData(0);for(let k=0;k<n;k++)c[k]=(Math.random()*2-1)*(1-k/n);const s=a.createBufferSource(),g=a.createGain();s.buffer=b;g.gain.value=.4;s.connect(g).connect(a.destination);s.start()}catch(e){}tone(90,.25,'triangle',.4)}
+function speak(who,text,cls,cb){
+  clearInterval(timer);const el=$('txt');el.textContent='';let k=0;
+  $('who').textContent=who;
+  ['robot','human'].forEach(x=>$(x).classList.remove('talk'));
+  if(cls)$(cls).classList.add('talk');
+  const f=cls==='robot'?640:cls==='human'?330:480;
+  const done=()=>{clearInterval(timer);el.textContent=text;if(cls)$(cls).classList.remove('talk');fin=null;cb&&cb()};
+  fin=done;
+  timer=setInterval(()=>{k++;el.textContent=text.slice(0,k);if(k%2===0)tone(f+(k%3)*40,.04,'square',.03);if(k>=text.length)done()},26);
+}
+$('dlg').onclick=e=>{if(fin&&!e.target.closest('button'))fin()};
+function turn(){
+  const d=D[i],r=d.w==='r';
+  $('rd').innerHTML='Кезек<b>'+(i+1)+'/12</b>';
+  $('topic').textContent=(Math.floor(i/2)+1)+'-тақырып: '+T[Math.floor(i/2)];
+  $('hint').textContent='Ұпайды кімге бересіз?';
+  $('rj').style.display='flex';$('rn').style.display='none';
+  $('pr').disabled=$('ph').disabled=true;busy=true;
+  tone(r?880:440,.1,'square',.05);tone(r?1175:550,.1,'square',.05,.1);
+  speak(r?'ЖИ (РОБОТ):':'АДАМ:',d.q,r?'robot':'human',()=>{$('pr').disabled=$('ph').disabled=false;busy=false});
+}
+function pick(side){
+  if(busy)return;busy=true;$('pr').disabled=$('ph').disabled=true;
+  const d=D[i];
+  const g=$('gv');g.classList.remove('hit');void g.getBoundingClientRect();g.classList.add('hit');bang();
+  if(side==='r')sr++;else sh++;
+  $('vr').textContent=sr;$('vh').textContent=sh;
+  tone(side==='r'?880:520,.12,'square',.06,.2);tone(side==='r'?1320:780,.18,'square',.06,.32);
+  $('hint').textContent='';
+  const pre=side===d.w?'Сіз сөйлеушіні қолдадыңыз. ':'Сіз қарсы тарапқа ұпай бердіңіз. ';
+  setTimeout(()=>speak('ТӨРЕШІНІҢ ОЙЫ:',pre+(side==='r'?RB:HB)[i%3],null,()=>{
+    $('rj').style.display='none';$('rn').style.display='flex';$('nx').textContent=i===11?'НӘТИЖЕ ▶':'КЕЛЕСІ ▶'}),450);
+}
+$('pr').onclick=()=>pick('r');$('ph').onclick=()=>pick('h');
+$('nx').onclick=()=>{tone(520,.06);i++;i>=12?end():turn()};
+function end(){
+  bang();[523,659,784,1047].forEach((f,k)=>tone(f,.15,'square',.05,k*.12));
+  let v,s;
+  if(sr>sh){v="ЖИ ЖЕҢДІ";s="Сіздің пікіріңізше, тест құрастыруда ЖИ үздік: ол жылдам, дәл және жүйелі. Дегенмен ЖИ жасаған тестті мұғалім әрқашан тексерген жөн."}
+  else if(sh>sr){v="АДАМ ЖЕҢДІ";s="Сіздің пікіріңізше, тест құрастыруда Адам үздік: ол шығармашыл, оқушыны түсінеді және өмірлік мысал келтіреді. Дегенмен жұмысты жылдамдататын ЖИ көмекшісі пайдалы."}
+  else{v="ДОСТЫҚ ЖЕҢДІ / ТЕҢ ОЙЫН";s="Сіз екі тарапты да бірдей бағаладыңыз. ЖИ жылдамдық пен дәлдікті, Адам шығармашылық пен тәжірибені қосады — ең жақсы тест екеуінің бірлескен жұмысынан шығады."}
+  $('ov').innerHTML='<div class="box"><h1>'+v+'</h1><div class="big">ЖИ '+sr+' : '+sh+' АДАМ</div><p><b>Судейство қорытындысы</b></p><p>'+s+'</p><button class="btn" id="st">Қайта ойнау</button></div>';
+  $('ov').style.display='flex';$('st').onclick=start;
+}
+function start(){
+  A();i=0;sr=0;sh=0;$('vr').textContent=0;$('vh').textContent=0;
+  $('ov').style.display='none';tone(330,.1);tone(440,.1,'square',.05,.1);turn();
+}
+$('st').onclick=start;
+</script>
+</body>
+</html>
